@@ -1,0 +1,87 @@
+{
+  "id": "r2d2",
+  "label": "R2-D2",
+  "brain_url": "http://localhost:8000",
+  "audio_categories": [
+    "quote",
+    "beep",
+    "alarm",
+    "music",
+    "whistle"
+  ],
+  "features": [
+    "home",
+    "dome",
+    "body",
+    "audio",
+    "scripts",
+    "lights",
+    "control"
+  ],
+  "devices": [
+    {
+      "id": "dome-rotate",
+      "plugin": "aqmh3615ns",
+      "config": {
+        "name": "Dome Rotation",
+        "pwm_pin": 4,
+        "in1_pin": 17,
+        "in2_pin": 18,
+        "frequency": 1000,
+        "max_speed": 50
+      }
+    },
+    {
+      "id": "audio",
+      "plugin": "audio",
+      "config": {
+        "name": "Audio",
+        "volume": 70
+      }
+    }
+  ],
+  "rules": [],
+  "screens": [
+    {
+      "id": "drive",
+      "label": "Drive",
+      "widgets": [
+        {
+          "id": "w-dome-rot",
+          "device": "dome-rotate",
+          "type": "MotorJoystick",
+          "size": 2,
+          "config": {
+            "axis": "horizontal",
+            "snap": true,
+            "label_neg": "LEFT",
+            "label_pos": "RIGHT",
+            "invert": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "audio",
+      "label": "Audio",
+      "widgets": [
+        {
+          "id": "w-au",
+          "device": "audio",
+          "type": "AudioPlayer",
+          "size": 1
+        },
+        {
+          "id": "w-1783076993193",
+          "device": "audio",
+          "type": "AudioBrowser",
+          "size": 3
+        }
+      ]
+    }
+  ],
+  "theme": {
+    "preset": "droid-blue",
+    "accent": "#444444"
+  }
+}

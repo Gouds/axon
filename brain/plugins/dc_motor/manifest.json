@@ -1,0 +1,15 @@
+{
+  "type": "dc_motor",
+  "label": "DC Motor (H-bridge)",
+  "version": "1.0",
+  "roles": ["brain"],
+  "config_schema": [
+    { "key": "name",      "label": "Instance name",  "type": "string" },
+    { "key": "pwm_pin",   "label": "PWM pin (BCM)",  "type": "gpio_pin" },
+    { "key": "in1_pin",   "label": "IN1 pin (BCM)",  "type": "gpio_pin" },
+    { "key": "in2_pin",   "label": "IN2 pin (BCM)",  "type": "gpio_pin" },
+    { "key": "frequency", "label": "PWM freq (Hz)",  "type": "int", "default": 1000 }
+  ],
+  "capabilities": ["spin", "stop"],
+  "sim_widget": "MotorBar"
+}

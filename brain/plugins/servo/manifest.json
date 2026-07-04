@@ -1,0 +1,17 @@
+{
+  "type": "servo",
+  "label": "Servo (PCA9685 I2C)",
+  "version": "1.0",
+  "roles": ["brain"],
+  "config_schema": [
+    { "key": "name",          "label": "Instance name",       "type": "string" },
+    { "key": "bus_address",   "label": "I2C address (hex)",   "type": "string", "default": "0x40" },
+    { "key": "channel",       "label": "Channel (0–15)",      "type": "int" },
+    { "key": "default_angle", "label": "Default angle (°)",   "type": "int", "default": 90 },
+    { "key": "open_angle",    "label": "Open angle (°)",      "type": "int", "default": 160 },
+    { "key": "close_angle",   "label": "Close angle (°)",     "type": "int", "default": 20 },
+    { "key": "speed",         "label": "Default speed (1–100)","type": "int", "default": 100 }
+  ],
+  "capabilities": ["move", "open", "close"],
+  "sim_widget": "ServoGauge"
+}

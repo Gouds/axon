@@ -1,0 +1,12 @@
+{
+  "type": "audio",
+  "label": "Audio Playback (pygame)",
+  "version": "1.0",
+  "roles": ["brain"],
+  "config_schema": [
+    { "key": "name",   "label": "Instance name", "type": "string" },
+    { "key": "volume", "label": "Default volume (0–100)", "type": "int", "default": 70 }
+  ],
+  "capabilities": ["play", "random", "stop", "volume"],
+  "sim_widget": "AudioPlayer"
+}

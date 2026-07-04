@@ -1,0 +1,16 @@
+{
+  "type": "aqmh3615ns",
+  "label": "AQMH3615NS Motor Driver",
+  "version": "1.0",
+  "roles": ["brain"],
+  "config_schema": [
+    { "key": "name",      "label": "Instance name",     "type": "string" },
+    { "key": "pwm_pin",   "label": "PWM pin (BCM)",     "type": "gpio_pin" },
+    { "key": "in1_pin",   "label": "IN1 pin (BCM)",     "type": "gpio_pin" },
+    { "key": "in2_pin",   "label": "IN2 pin (BCM)",     "type": "gpio_pin" },
+    { "key": "frequency", "label": "PWM freq (Hz)",     "type": "int", "default": 1000 },
+    { "key": "max_speed", "label": "Max speed (1–100)", "type": "int", "default": 100 }
+  ],
+  "capabilities": ["spin", "stop"],
+  "sim_widget": "MotorJoystick"
+}
