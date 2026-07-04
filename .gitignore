@@ -6,12 +6,12 @@ venv/
 .venv/
 *.egg-info/
 dist/
+!ui/dist/
 .DS_Store
 .pytest_cache/
 
 # Frontend build artifacts
 node_modules/
-ui/dist/
 controller/ui/dist/
 
 # Generated Arduino sketch (built from template)
