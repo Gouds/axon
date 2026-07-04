@@ -17,8 +17,5 @@ controller/ui/dist/
 # Generated Arduino sketch (built from template)
 arduino/arduino.ino
 
-# Large binary assets — add to your profile directories manually
-profiles/*/audio/*.wav
-profiles/*/audio/*.mp3
-profiles/*/audio/*.ogg
-profiles/*/audio/*.flac
+# Large binary assets that should not be committed (add exclusions per-profile if needed)
+# profiles/*/audio/*.mp3
