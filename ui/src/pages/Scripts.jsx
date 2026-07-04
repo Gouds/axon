@@ -343,14 +343,20 @@ export default function Scripts() {
   }, [scripts, subscribe])
 
   async function createScript() {
-    const res = await fetch('/scripts', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: 'New Script', trigger: { type: 'manual' }, steps: [] }),
-    })
-    const created = await res.json()
-    setScripts((prev) => [...prev, created])
-    setSelectedId(created.id)
+    try {
+      const res = await fetch('/scripts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: 'New Script', trigger: { type: 'manual' }, steps: [] }),
+      })
+      if (!res.ok) throw new Error(`${res.status} ${res.statusText}`)
+      const created = await res.json()
+      setScripts((prev) => [...prev, created])
+      setSelectedId(created.id)
+    } catch (e) {
+      console.error('Failed to create script:', e)
+      alert(`Could not create script: ${e.message}`)
+    }
   }
 
   async function saveScript(draft) {
