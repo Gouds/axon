@@ -11,13 +11,15 @@ from fastapi.staticfiles import StaticFiles
 
 from brain.core.event_bus import EventBus
 from brain.core.device_registry import DeviceRegistry
-from brain.routers import health, config, assets, actions, events, plugins, profiles
+from brain.core.script_runner import ScriptRunner
+from brain.routers import health, config, assets, actions, events, plugins, profiles, scripts
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    app.state.bus = EventBus()
+    app.state.bus      = EventBus()
     app.state.registry = DeviceRegistry(app.state.bus)
+    app.state.runner   = ScriptRunner(app.state.registry, app.state.bus)
 
     # Auto-load profile from PROFILE env var on startup
     profile_id = os.getenv("PROFILE")
@@ -26,6 +28,8 @@ async def lifespan(app: FastAPI):
         if profile_path.exists():
             profile_data = json.loads(profile_path.read_text())
             await app.state.registry.load_profile(profile_data)
+            app.state.runner.load_scripts(profile_id)
+            await app.state.runner.run_startup_scripts()
 
     yield
     await app.state.registry.shutdown()
@@ -47,6 +51,7 @@ app.include_router(actions.router,   tags=["actions"])
 app.include_router(events.router,    tags=["events"])
 app.include_router(plugins.router,   tags=["plugins"])
 app.include_router(profiles.router,  prefix="/profiles", tags=["profiles"])
+app.include_router(scripts.router,                      tags=["scripts"])
 
 # Serve built UI in production (ui/dist must exist)
 _ui_dist = Path(__file__).parent.parent / "ui" / "dist"

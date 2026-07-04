@@ -7,6 +7,7 @@ const NAV = [
   { to: '/build',    label: 'Build',     end: false },
   { to: '/control',  label: 'Control',   end: false },
   { to: '/assets',   label: 'Assets',    end: false },
+  { to: '/scripts',  label: 'Scripts',   end: false },
   { to: '/profiles', label: 'Profiles',  end: false },
 ]
 

@@ -7,6 +7,7 @@ import Dashboard from './pages/Dashboard'
 import Build from './pages/Build'
 import Control from './pages/Control'
 import Assets from './pages/Assets'
+import Scripts from './pages/Scripts'
 import Profiles from './pages/Profiles'
 
 export default function App() {
@@ -22,6 +23,7 @@ export default function App() {
                 <Route path="configure"  element={<Navigate to="/build" replace />} />
                 <Route path="control"    element={<Control />} />
                 <Route path="assets"     element={<Assets />} />
+                <Route path="scripts"    element={<Scripts />} />
                 <Route path="profiles"   element={<Profiles />} />
               </Route>
             </Routes>
