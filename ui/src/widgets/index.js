@@ -3,6 +3,7 @@ import ServoSlider    from './ServoSlider'
 import AudioPlayer    from './AudioPlayer'
 import AudioBrowser   from './AudioBrowser'
 import MotorJoystick  from './MotorJoystick'
+import LightsPanel    from './LightsPanel'
 
 export const WIDGET_REGISTRY = {
   MotorThrottle: {
@@ -24,6 +25,11 @@ export const WIDGET_REGISTRY = {
     label: 'Audio Browser',
     plugins: ['audio'],
     component: AudioBrowser,
+  },
+  LightsPanel: {
+    label: 'Lights Panel',
+    plugins: ['astropixels'],
+    component: LightsPanel,
   },
   MotorJoystick: {
     label: 'Motor Joystick',

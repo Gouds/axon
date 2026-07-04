@@ -1723,6 +1723,145 @@ code {
   padding: 12px 0;
 }
 
+/* ── Lights Panel widget ─────────────────────────────────── */
+
+.widget-lights {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.lights-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.lights-last-cmd {
+  font-size: 10px;
+  font-family: monospace;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lights-tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.lights-tab {
+  padding: 4px 12px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.12s;
+}
+
+.lights-tab:hover { color: var(--text-primary); }
+.lights-tab.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.lights-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.lights-row {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.lights-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.lights-val {
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--text-primary);
+}
+
+.lights-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.lights-pill {
+  padding: 3px 10px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.12s;
+}
+
+.lights-pill:hover { color: var(--text-primary); border-color: #555; }
+.lights-pill.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+.lights-colours {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.lights-swatch {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.12s;
+  outline: none;
+}
+
+.lights-swatch:hover { transform: scale(1.15); }
+.lights-swatch.active { border-color: #fff; box-shadow: 0 0 0 2px var(--accent); }
+
+.lights-slider {
+  width: 100%;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.lights-send {
+  width: 100%;
+  margin-top: 2px;
+}
+
 /* ── Motor Joystick widget ───────────────────────────────── */
 
 .widget-joystick {

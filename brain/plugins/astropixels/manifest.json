@@ -1,0 +1,13 @@
+{
+  "type": "astropixels",
+  "label": "AstroPixels ESP32",
+  "version": "1.0",
+  "roles": ["brain"],
+  "config_schema": [
+    { "key": "name",        "label": "Instance name",          "type": "string" },
+    { "key": "i2c_bus",     "label": "I2C bus number",         "type": "int",    "default": 1 },
+    { "key": "i2c_address", "label": "I2C address (decimal)",  "type": "int",    "default": 10 }
+  ],
+  "capabilities": ["logic", "holo", "command"],
+  "sim_widget": "LightsPanel"
+}

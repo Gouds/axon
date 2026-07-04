@@ -32,6 +32,15 @@
       }
     },
     {
+      "id": "lights",
+      "plugin": "astropixels",
+      "config": {
+        "name": "Lights",
+        "i2c_bus": 1,
+        "i2c_address": 10
+      }
+    },
+    {
       "id": "audio",
       "plugin": "audio",
       "config": {
@@ -58,6 +67,18 @@
             "label_pos": "RIGHT",
             "invert": false
           }
+        }
+      ]
+    },
+    {
+      "id": "lights",
+      "label": "Lights",
+      "widgets": [
+        {
+          "id": "w-lights",
+          "device": "lights",
+          "type": "LightsPanel",
+          "size": 2
         }
       ]
     },
