@@ -47,7 +47,29 @@
         "name": "Audio",
         "volume": 70
       }
-    }
+    },
+
+    { "id": "body-servo-0", "plugin": "servo", "config": { "name": "Body 01",          "bus_address": "0x40", "channel": 0,  "default_angle": 0,   "open_angle": 0,   "close_angle": 180, "speed": 100 } },
+    { "id": "body-servo-1", "plugin": "servo", "config": { "name": "Body 02",          "bus_address": "0x40", "channel": 1,  "default_angle": 0,   "open_angle": 0,   "close_angle": 180, "speed": 100 } },
+
+    { "id": "dome-panel-1",  "plugin": "servo", "config": { "name": "Panel 1",         "bus_address": "0x41", "channel": 0,  "default_angle": 0,   "open_angle": 0,   "close_angle": 180, "speed": 50 } },
+    { "id": "dome-panel-2",  "plugin": "servo", "config": { "name": "Panel 2",         "bus_address": "0x41", "channel": 1,  "default_angle": 0,   "open_angle": 0,   "close_angle": 180, "speed": 50 } },
+    { "id": "dome-panel-3",  "plugin": "servo", "config": { "name": "Panel 3",         "bus_address": "0x41", "channel": 2,  "default_angle": 0,   "open_angle": 0,   "close_angle": 180, "speed": 50 } },
+    { "id": "dome-panel-4",  "plugin": "servo", "config": { "name": "Panel 4",         "bus_address": "0x41", "channel": 3,  "default_angle": 0,   "open_angle": 0,   "close_angle": 180, "speed": 50 } },
+    { "id": "dome-panel-7",  "plugin": "servo", "config": { "name": "Panel 7",         "bus_address": "0x41", "channel": 4,  "default_angle": 0,   "open_angle": 0,   "close_angle": 180, "speed": 50 } },
+    { "id": "dome-panel-11", "plugin": "servo", "config": { "name": "Panel 11",        "bus_address": "0x41", "channel": 5,  "default_angle": 0,   "open_angle": 0,   "close_angle": 180, "speed": 50 } },
+    { "id": "dome-panel-13", "plugin": "servo", "config": { "name": "Panel 13",        "bus_address": "0x41", "channel": 6,  "default_angle": 0,   "open_angle": 0,   "close_angle": 180, "speed": 50 } },
+    { "id": "dome-pie-1",    "plugin": "servo", "config": { "name": "Pie Panel 1",     "bus_address": "0x41", "channel": 12, "default_angle": 0,   "open_angle": 0,   "close_angle": 180, "speed": 50 } },
+    { "id": "dome-pie-2",    "plugin": "servo", "config": { "name": "Pie Panel 2",     "bus_address": "0x41", "channel": 13, "default_angle": 0,   "open_angle": 0,   "close_angle": 180, "speed": 50 } },
+    { "id": "dome-pie-5",    "plugin": "servo", "config": { "name": "Pie Panel 5",     "bus_address": "0x41", "channel": 14, "default_angle": 0,   "open_angle": 0,   "close_angle": 180, "speed": 50 } },
+    { "id": "dome-pie-6",    "plugin": "servo", "config": { "name": "Pie Panel 6",     "bus_address": "0x41", "channel": 15, "default_angle": 0,   "open_angle": 0,   "close_angle": 180, "speed": 50 } },
+
+    { "id": "holo-1-1", "plugin": "servo", "config": { "name": "Holoprojector 1-1",   "bus_address": "0x42", "channel": 0,  "default_angle": 0,   "open_angle": 0,   "close_angle": 180, "speed": 50 } },
+    { "id": "holo-1-2", "plugin": "servo", "config": { "name": "Holoprojector 1-2",   "bus_address": "0x42", "channel": 1,  "default_angle": 0,   "open_angle": 0,   "close_angle": 180, "speed": 50 } },
+    { "id": "holo-2-1", "plugin": "servo", "config": { "name": "Holoprojector 2-1",   "bus_address": "0x42", "channel": 2,  "default_angle": 0,   "open_angle": 0,   "close_angle": 180, "speed": 50 } },
+    { "id": "holo-2-2", "plugin": "servo", "config": { "name": "Holoprojector 2-2",   "bus_address": "0x42", "channel": 3,  "default_angle": 0,   "open_angle": 0,   "close_angle": 180, "speed": 50 } },
+    { "id": "holo-3-1", "plugin": "servo", "config": { "name": "Holoprojector 3-1",   "bus_address": "0x42", "channel": 4,  "default_angle": 0,   "open_angle": 0,   "close_angle": 180, "speed": 50 } },
+    { "id": "holo-3-2", "plugin": "servo", "config": { "name": "Holoprojector 3-2",   "bus_address": "0x42", "channel": 5,  "default_angle": 0,   "open_angle": 0,   "close_angle": 180, "speed": 50 } }
   ],
   "rules": [],
   "screens": [
@@ -71,33 +93,55 @@
       ]
     },
     {
+      "id": "dome-panels",
+      "label": "Dome Panels",
+      "widgets": [
+        { "id": "w-dp1",  "device": "dome-panel-1",  "type": "ServoSlider", "size": 1 },
+        { "id": "w-dp2",  "device": "dome-panel-2",  "type": "ServoSlider", "size": 1 },
+        { "id": "w-dp3",  "device": "dome-panel-3",  "type": "ServoSlider", "size": 1 },
+        { "id": "w-dp4",  "device": "dome-panel-4",  "type": "ServoSlider", "size": 1 },
+        { "id": "w-dp7",  "device": "dome-panel-7",  "type": "ServoSlider", "size": 1 },
+        { "id": "w-dp11", "device": "dome-panel-11", "type": "ServoSlider", "size": 1 },
+        { "id": "w-dp13", "device": "dome-panel-13", "type": "ServoSlider", "size": 1 },
+        { "id": "w-pie1", "device": "dome-pie-1",    "type": "ServoSlider", "size": 1 },
+        { "id": "w-pie2", "device": "dome-pie-2",    "type": "ServoSlider", "size": 1 },
+        { "id": "w-pie5", "device": "dome-pie-5",    "type": "ServoSlider", "size": 1 },
+        { "id": "w-pie6", "device": "dome-pie-6",    "type": "ServoSlider", "size": 1 }
+      ]
+    },
+    {
+      "id": "holos",
+      "label": "Holos",
+      "widgets": [
+        { "id": "w-h11", "device": "holo-1-1", "type": "ServoSlider", "size": 2 },
+        { "id": "w-h12", "device": "holo-1-2", "type": "ServoSlider", "size": 2 },
+        { "id": "w-h21", "device": "holo-2-1", "type": "ServoSlider", "size": 2 },
+        { "id": "w-h22", "device": "holo-2-2", "type": "ServoSlider", "size": 2 },
+        { "id": "w-h31", "device": "holo-3-1", "type": "ServoSlider", "size": 2 },
+        { "id": "w-h32", "device": "holo-3-2", "type": "ServoSlider", "size": 2 }
+      ]
+    },
+    {
+      "id": "body",
+      "label": "Body",
+      "widgets": [
+        { "id": "w-b0", "device": "body-servo-0", "type": "ServoSlider", "size": 2 },
+        { "id": "w-b1", "device": "body-servo-1", "type": "ServoSlider", "size": 2 }
+      ]
+    },
+    {
       "id": "lights",
       "label": "Lights",
       "widgets": [
-        {
-          "id": "w-lights",
-          "device": "lights",
-          "type": "LightsPanel",
-          "size": 2
-        }
+        { "id": "w-lights", "device": "lights", "type": "LightsPanel", "size": 2 }
       ]
     },
     {
       "id": "audio",
       "label": "Audio",
       "widgets": [
-        {
-          "id": "w-au",
-          "device": "audio",
-          "type": "AudioPlayer",
-          "size": 1
-        },
-        {
-          "id": "w-1783076993193",
-          "device": "audio",
-          "type": "AudioBrowser",
-          "size": 3
-        }
+        { "id": "w-au",              "device": "audio", "type": "AudioPlayer",  "size": 1 },
+        { "id": "w-1783076993193",   "device": "audio", "type": "AudioBrowser", "size": 3 }
       ]
     }
   ],
