@@ -12,6 +12,6 @@
     { "key": "close_angle",   "label": "Close angle (°)",     "type": "int", "default": 20 },
     { "key": "speed",         "label": "Default speed (1–100)","type": "int", "default": 100 }
   ],
-  "capabilities": ["move", "open", "close"],
+  "capabilities": ["move", "open", "close", "set_angle"],
   "sim_widget": "ServoGauge"
 }

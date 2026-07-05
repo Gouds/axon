@@ -12,15 +12,18 @@ try:
 except ImportError:
     _HAS_SERVO = False
 
-# Shared ServoKit instances keyed by (address, scl, sda) — matches pi_brain's bus cache pattern
-_bus_cache: dict = {}
+# Single shared I2C bus — all PCA9685 boards share pins 2/3, differ only by address
+_i2c = None
+_kit_cache: dict[int, "ServoKit"] = {}
 
 
 def _get_kit(address: int) -> "ServoKit":
-    if address not in _bus_cache:
-        i2c = busio.I2C(board.SCL, board.SDA)
-        _bus_cache[address] = ServoKit(channels=16, i2c=i2c, address=address)
-    return _bus_cache[address]
+    global _i2c
+    if _i2c is None:
+        _i2c = busio.I2C(board.SCL, board.SDA)
+    if address not in _kit_cache:
+        _kit_cache[address] = ServoKit(channels=16, i2c=_i2c, address=address)
+    return _kit_cache[address]
 
 
 class RealPlugin(DevicePlugin):
@@ -44,7 +47,7 @@ class RealPlugin(DevicePlugin):
     async def handle_action(self, action: dict):
         atype = action.get("type")
         speed = int(action.get("speed", self.config.get("speed", 100)))
-        if atype == "move":
+        if atype in ("move", "set_angle"):
             await self._move_to(float(action.get("angle", self._angle)), speed)
         elif atype == "open":
             await self._move_to(float(self.config.get("open_angle", 160)), speed)

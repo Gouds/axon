@@ -11,7 +11,7 @@ class MockPlugin(DevicePlugin):
     async def handle_action(self, action: dict):
         atype = action.get("type")
         speed = int(action.get("speed", self.config.get("speed", 100)))
-        if atype == "move":
+        if atype in ("move", "set_angle"):
             await self._move_to(float(action.get("angle", self._angle)), speed)
         elif atype == "open":
             await self._move_to(float(self.config.get("open_angle", 160)), speed)

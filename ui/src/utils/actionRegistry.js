@@ -11,7 +11,7 @@ export const ACTION_REGISTRY = {
     stop: [],
   },
   servo: {
-    set_angle: [{ key: 'angle', label: 'Angle (0–180)', type: 'number', min: 0, max: 180, default: 90 }],
+    move:  [{ key: 'angle', label: 'Angle (°)', type: 'number', min: 0, max: 180, default: 90 }],
     open:  [],
     close: [],
   },
