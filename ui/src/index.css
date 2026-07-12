@@ -2314,3 +2314,168 @@ code {
   font-size: 13px;
   transition: all 0.12s;
 }
+
+/* ── Sandbox page ───────────────────────────────────────── */
+
+.sandbox-page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.sandbox-layout {
+  display: flex;
+  gap: 24px;
+  flex: 1;
+  min-height: 0;
+  padding: 20px 24px 24px;
+  overflow: hidden;
+}
+
+.sandbox-svg-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 0 0 auto;
+}
+
+.sandbox-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sandbox-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.sandbox-actions {
+  display: flex;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.dome-svg {
+  width: 460px;
+  height: 460px;
+  display: block;
+  border-radius: 12px;
+  background: #080808;
+  border: 1px solid var(--border);
+}
+
+.sandbox-panel-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow-y: auto;
+  flex: 1;
+  min-width: 200px;
+  max-width: 280px;
+}
+
+.sandbox-section-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  padding: 10px 0 4px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 2px;
+}
+
+.sandbox-section-label:first-child {
+  padding-top: 2px;
+}
+
+.sandbox-panel-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 7px 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.1s, border-color 0.1s;
+}
+
+.sandbox-panel-row:hover:not(:disabled) {
+  background: var(--surface-hover, #1e1e1e);
+  border-color: var(--accent);
+}
+
+.sandbox-panel-row.open {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface));
+}
+
+.sandbox-panel-row.no-device {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.sandbox-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--text-secondary);
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+
+.sandbox-indicator.open {
+  background: var(--accent);
+  box-shadow: 0 0 6px color-mix(in srgb, var(--accent) 60%, transparent);
+}
+
+.sandbox-panel-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  flex: 1;
+}
+
+.sandbox-panel-state {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.sandbox-panel-row.open .sandbox-panel-state {
+  color: var(--accent);
+}
+
+.sandbox-holo-row {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 7px 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+}
+
+.sandbox-holo-btns {
+  display: flex;
+  gap: 5px;
+}
+
+@media (max-width: 768px) {
+  .sandbox-layout {
+    flex-direction: column;
+    overflow-y: auto;
+  }
+  .dome-svg {
+    width: 100%;
+    height: auto;
+  }
+  .sandbox-panel-list {
+    max-width: 100%;
+  }
+}

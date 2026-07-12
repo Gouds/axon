@@ -9,6 +9,7 @@ import Control from './pages/Control'
 import Assets from './pages/Assets'
 import Scripts from './pages/Scripts'
 import Profiles from './pages/Profiles'
+import Sandbox from './pages/Sandbox'
 
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
                 <Route path="assets"     element={<Assets />} />
                 <Route path="scripts"    element={<Scripts />} />
                 <Route path="profiles"   element={<Profiles />} />
+                <Route path="sandbox"    element={<Sandbox />} />
               </Route>
             </Routes>
           </BrowserRouter>

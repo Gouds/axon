@@ -65,6 +65,7 @@ class RealPlugin(DevicePlugin):
             raise RuntimeError("pygame not available — use mock mode")
         pygame.mixer.init()
         pygame.mixer.music.set_volume(self._volume / 100)
+        self._set_system_volume(self._volume)
 
     async def shutdown(self):
         if _HAS_PYGAME:
@@ -74,10 +75,12 @@ class RealPlugin(DevicePlugin):
         atype = action.get("type")
         if atype == "play":
             self._play(action.get("file"))
+            await self._emit({"playing": self._playing, "volume": self._volume, "mock": False})
         elif atype == "random":
             chosen = self._pick_random(action.get("category") or action.get("prefix", ""))
             if chosen:
                 self._play(chosen)
+                await self._emit({"playing": self._playing, "volume": self._volume, "mock": False})
         elif atype == "stop":
             pygame.mixer.music.stop()
             self._playing = None
@@ -85,9 +88,22 @@ class RealPlugin(DevicePlugin):
         elif atype == "volume":
             self._volume = max(0, min(100, int(action.get("level", self._volume))))
             pygame.mixer.music.set_volume(self._volume / 100)
+            self._set_system_volume(self._volume)
+            await self._emit({"playing": self._playing, "volume": self._volume, "mock": False})
+
+    def _set_system_volume(self, vol: int):
+        # Try common ALSA and PulseAudio controls in order
+        cmds = [
+            ["amixer", "-q", "sset", "Master", f"{vol}%"],
+            ["amixer", "-q", "sset", "PCM", f"{vol}%"],
+            ["pactl", "set-sink-volume", "@DEFAULT_SINK@", f"{vol}%"],
+        ]
+        for cmd in cmds:
             try:
-                subprocess.run(["amixer", "set", "PCM", f"{self._volume}%"], capture_output=True)
-            except FileNotFoundError:
+                r = subprocess.run(cmd, capture_output=True, timeout=2)
+                if r.returncode == 0:
+                    break
+            except (FileNotFoundError, subprocess.TimeoutExpired):
                 pass
 
     def _play(self, filename: str | None):

@@ -2,22 +2,45 @@ import { useState, useEffect, useRef } from 'react'
 import { useEventBus } from '../context/EventBusContext'
 import { dispatch } from '../utils/dispatch'
 
+const storageKey = (deviceId) => `axon.volume.${deviceId}`
+
 export default function AudioPlayer({ device, profile }) {
   const { subscribe } = useEventBus()
   const [playing, setPlaying] = useState(null)
-  const [volume, setVolume] = useState(device.config?.volume ?? 70)
   const audioRef = useRef(null)
+
+  // Initialise from localStorage so there is never a flash back to the config default
+  const [volume, setVolume] = useState(() => {
+    const cached = localStorage.getItem(storageKey(device.id))
+    return cached !== null ? parseInt(cached, 10) : (device.config?.volume ?? 70)
+  })
 
   const categories = profile?.audio_categories || []
   const name = device.config?.name || device.id
 
+  function saveVolume(val) {
+    setVolume(val)
+    localStorage.setItem(storageKey(device.id), String(val))
+  }
+
+  // On mount, sync with the brain's live state (beats localStorage if different)
+  useEffect(() => {
+    fetch('/status')
+      .then(r => r.json())
+      .then(data => {
+        const state = data.devices?.find(d => d.id === device.id)?.state
+        if (state?.volume !== undefined) saveVolume(state.volume)
+      })
+      .catch(() => {})
+  }, [device.id])
+
+  // Keep in sync with brain state events
   useEffect(() => {
     return subscribe(`${device.id}.state`, (data) => {
-      if (data.volume !== undefined) setVolume(data.volume)
+      if (data.volume !== undefined) saveVolume(data.volume)
 
       if (data.mock) {
         if (data.playing) {
-          // Stop any current browser audio before starting new
           if (audioRef.current) {
             audioRef.current.pause()
             audioRef.current = null
@@ -41,13 +64,11 @@ export default function AudioPlayer({ device, profile }) {
           setPlaying(null)
         }
       } else {
-        // Real hardware plays through its own speakers — just track state
         setPlaying(data.playing ?? null)
       }
     })
   }, [device.id, subscribe, profile.id])
 
-  // Stop browser audio on unmount
   useEffect(() => {
     return () => {
       if (audioRef.current) {
@@ -65,11 +86,36 @@ export default function AudioPlayer({ device, profile }) {
     dispatch(device.id, 'stop')
   }
 
+  // Drag: update state + brain continuously
   function handleVolume(e) {
-    const val = parseInt(e.target.value)
-    setVolume(val)
+    const val = parseInt(e.target.value, 10)
+    saveVolume(val)
     if (audioRef.current) audioRef.current.volume = val / 100
     dispatch(device.id, 'volume', { level: val })
+  }
+
+  // Release: persist the final value back to the profile so it survives brain restarts
+  function commitVolume(e) {
+    const val = parseInt(e.target.value, 10)
+    if (!profile?.id) return
+    fetch(`/profiles/${profile.id}`)
+      .then(r => r.json())
+      .then(profileData => {
+        const updated = {
+          ...profileData,
+          devices: profileData.devices.map(d =>
+            d.id === device.id
+              ? { ...d, config: { ...d.config, volume: val } }
+              : d
+          ),
+        }
+        return fetch(`/profiles/${profile.id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(updated),
+        })
+      })
+      .catch(() => {})
   }
 
   return (
@@ -114,6 +160,8 @@ export default function AudioPlayer({ device, profile }) {
           max="100"
           value={volume}
           onChange={handleVolume}
+          onPointerUp={commitVolume}
+          onKeyUp={commitVolume}
         />
         <span className="audio-vol-value">{volume}%</span>
       </div>

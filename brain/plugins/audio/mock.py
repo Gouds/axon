@@ -74,6 +74,7 @@ class MockPlugin(DevicePlugin):
         elif atype == "volume":
             self._volume = max(0, min(100, int(action.get("level", self._volume))))
             print(f"[{self.device_id}] AUDIO volume {self._volume}%")
+            await self._emit({"playing": self._playing, "volume": self._volume, "mock": True})
 
     def get_state(self) -> dict:
         return {"playing": self._playing, "volume": self._volume, "mock": True}

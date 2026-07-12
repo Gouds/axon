@@ -9,6 +9,7 @@ const NAV = [
   { to: '/assets',   label: 'Assets',    end: false },
   { to: '/scripts',  label: 'Scripts',   end: false },
   { to: '/profiles', label: 'Profiles',  end: false },
+  { to: '/sandbox',  label: 'Sandbox',   end: false },
 ]
 
 export default function Layout() {
