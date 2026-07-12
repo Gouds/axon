@@ -81,8 +81,73 @@ nav {
 .nav-link.active { background: var(--bg-card); color: var(--text-primary); }
 
 .sidebar-footer {
-  padding: 14px 16px;
+  padding: 10px 16px 14px;
   border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.system-volume {
+  padding: 6px 0 4px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 2px;
+}
+
+.system-vol-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.system-vol-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  color: var(--text-secondary);
+}
+
+.system-vol-slider {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--border);
+  outline: none;
+  cursor: pointer;
+}
+
+.system-vol-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.system-vol-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.system-vol-slider::-moz-range-thumb {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: none;
+  cursor: pointer;
+}
+
+.system-vol-value {
+  font-size: 11px;
+  color: var(--text-secondary);
+  min-width: 30px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
 }
 
 .connection-badge {

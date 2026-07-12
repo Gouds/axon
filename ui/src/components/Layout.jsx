@@ -1,6 +1,7 @@
 import { NavLink, Outlet } from 'react-router-dom'
 import ConnectionBadge from './ConnectionBadge'
 import ThemePicker from './ThemePicker'
+import SystemVolume from './SystemVolume'
 
 const NAV = [
   { to: '/',         label: 'Dashboard', end: true  },
@@ -32,6 +33,7 @@ export default function Layout() {
           ))}
         </nav>
         <div className="sidebar-footer">
+          <SystemVolume />
           <ConnectionBadge />
           <ThemePicker />
         </div>
